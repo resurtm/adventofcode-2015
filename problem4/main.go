@@ -17,6 +17,7 @@ var testCasesPartOne = []testCase{
 }
 
 var testCasesPartTwo = []testCase{
+	{input: "iwrupvqb", result: -1},
 }
 
 func RunPartOne() {
@@ -61,5 +62,14 @@ func (tc *testCase) solvePartOne() int {
 }
 
 func (tc *testCase) solvePartTwo() int {
-	return 0
+	i := 0
+	for {
+		x := fmt.Sprintf("%s%d", tc.input, i)
+		hash := fmt.Sprintf("%x", md5.Sum([]byte(x)))
+		if hash[:6] == "000000" {
+			break
+		}
+		i++
+	}
+	return i
 }
